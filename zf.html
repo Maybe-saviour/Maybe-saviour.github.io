@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>彩桑缘 -小桑树 大梦想</title>
+
+		<style>
+			body {
+				/*加载背景图：图片地址 不平铺 */
+				background: url(assets/images/bg/13.png) no-repeat;
+				/* 让背景图基于容器大小伸缩 */
+				background-size: 100% 100%;
+				background-attachment: fixed;
+			}
+			
+			input[type='button'] {
+				background-color:rgb(240, 255, 240);
+				border: none;
+				color: #ffffff;
+				padding: 10px 10px;
+				font-size: 16px;
+				border-radius: 5px;
+			}
+			input[type='button']:hover,
+			input[type='button']:hover
+			{
+				background-color: blue ;
+				cursor: pointer;
+			}
+			
+			
+			 #a {
+					background-color: rgba(213, 255, 216, 0.5);
+				}
+			#b{
+				font-family: "宋体";
+				font-size: 20px;
+			}	
+			#c{
+				font-family: "微软黑体";
+				font-size: 30px;
+			}
+			
+			.smart-green {
+			 
+			    margin-left:auto;
+			 
+			         margin-right:auto;
+			 
+			         max-width: 500px;
+			 
+			         background: #F8F8F8;
+			 
+			         padding: 30px 30px 20px 30px;
+			 
+			         font: 12px Arial, Helvetica, sans-serif;
+			 
+			         color: #666;
+			 
+			         border-radius: 5px;
+			 
+			         -webkit-border-radius: 5px;
+			 
+			         -moz-border-radius: 5px;
+			 
+			}
+			 
+			.smart-green h1 {
+			 
+			         font: 24px "Trebuchet MS", Arial, Helvetica, sans-serif;
+			 
+			         padding: 20px 0px 20px 40px;
+			 
+			         display: block;
+			 
+			         margin: -30px -30px 10px -30px;
+			 
+			         color: #FFF;
+			 
+			         background: #9DC45F;
+			 
+			         text-shadow: 1px 1px 1px #949494;
+			 
+			         border-radius: 5px 5px 0px 0px;
+			 
+			         -webkit-border-radius: 5px 5px 0px 0px;
+			 
+			         -moz-border-radius: 5px 5px 0px 0px;
+			 
+			         border-bottom:1px solid #89AF4C;
+			 
+			 
+			 
+			}
+			 
+			.smart-green h1>span {
+			 
+			         display: block;
+			 
+			         font-size: 11px;
+			 
+			         color: #FFF;
+			 
+			}
+			 
+			 
+			 
+			.smart-green label,span {
+			 
+			         display: block;
+			 
+			         margin: 0px 0px 5px;
+					 font-size: 30px;
+			 
+			}
+			.smart-green p{
+				font-size: 20px;
+			}
+			 
+			.smart-green label>span {
+			 
+			         float: left;
+			 
+			         margin-top: 10px;
+			 
+			         color: #5E5E5E;
+			 
+			}
+			 
+			.smart-green input[type="text"], .smart-green input[type="email"], .smart-green input[type="tel"],.smart-green textarea, .smart-green select {
+			 
+			         color: #555;
+			 
+			         height: 30px;
+			 
+			         line-height:15px;
+			 
+			         width: 100%;
+			 
+			         padding: 0px 0px 0px 10px;
+			 
+			         margin-top: 2px;
+			 
+			         border: 1px solid #E5E5E5;
+			 
+			         background: #FBFBFB;
+			 
+			         outline: 0;
+			 
+			         -webkit-box-shadow: inset 1px 1px 2px rgba(238, 238, 238, 0.2);
+			 
+			         box-shadow: inset 1px 1px 2px rgba(238, 238, 238, 0.2);
+			 
+			         font: normal 14px/14px Arial, Helvetica, sans-serif;
+					
+			 
+			}
+			
+			.smart-green input[type="submit"]{
+			 
+			         background-color: #9DC45F;
+			 
+			         border-radius: 5px;
+			 
+			         -webkit-border-radius: 5px;
+			 
+			         -moz-border-border-radius: 5px;
+			 
+			         border: none;
+			 
+			         padding: 10px 25px 10px 25px;
+			 
+			         color: #FFF;
+			 
+			         text-shadow: 1px 1px 1px #949494;
+					 font-size: 20px;
+			 
+			}
+			 
+			.smart-green input[type="submit"]:hover {
+			 
+			         background-color:#80A24A;
+					  font-size: 20px;
+			 
+			}
+			 
+			.smart-green textarea{
+			 
+			         height:100px;
+			 
+			         padding-top: 10px;
+					font-size: 20px;
+			 
+			}
+			 
+			.smart-green select {
+			 
+			         background: url('down-arrow.png') no-repeat right, -moz-linear-gradient(top, #FBFBFB 0%, #E9E9E9 100%);
+			 
+			         background: url('down-arrow.png') no-repeat right, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FBFBFB), color-stop(100%,#E9E9E9));
+			 
+			         appearance:none;
+			 
+			         -webkit-appearance:none;
+			 
+			         -moz-appearance: none;
+			 
+			         text-indent: 0.01px;
+			 
+			         text-overflow: '';
+			 
+			         width:100%;
+			 
+			         height:30px;
+			 
+			}
+			 
+			.smart-green .button {
+			 
+			         background-color: #9DC45F;
+			 
+			         border-radius: 5px;
+			 
+			         -webkit-border-radius: 5px;
+			 
+			         -moz-border-border-radius: 5px;
+			 
+			         border: none;
+			 
+			         padding: 10px 25px 10px 25px;
+			 
+			         color: #FFF;
+			 
+			         text-shadow: 1px 1px 1px #949494;
+			 
+			}
+			 
+			.smart-green .button:hover {
+			 
+			         background-color:#80A24A;
+			 
+			}			
+			
+			
+			
+		</style>
+		
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" href="assets/css/an.css" />
+	<link rel="stylesheet" href="assets/css/bootstrap.css" />
+	<link rel="stylesheet" href="assets/css/animate.css" />
+	<link rel="stylesheet" href="assets/css/themewar-font.css" />
+	<link rel="stylesheet" href="assets/css/organio-icon.css" />
+	<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="assets/css/nice-select.css">
+	<link rel="stylesheet" href="assets/css/slick.css">
+	<link rel="stylesheet" href="assets/css/lightcase.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/settings.css">
+	<link rel="stylesheet" href="assets/css/preset.css" />
+	<link rel="stylesheet" href="assets/css/ignore_for_wp.css" />
+	<link rel="stylesheet" href="assets/css/theme.css" />
+	<link rel="stylesheet" href="assets/css/responsive.css" />
+	<link rel="icon" type="image/png" href="assets/images/favicon.png">
+	
+	<script src="assets/js/update.js"></script>
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/jquery-ui.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery.plugin.min.js"></script>
+	<script src="assets/js/jquery.countdown.min.js"></script>
+	<script src="assets/js/jquery.appear.js"></script>
+	<script src="assets/js/owl.carousel.min.js"></script>
+	<script src="assets/js/owl.carousel.filter.js"></script>
+	<script src="assets/js/shuffle.min.js"></script>
+	<script src="assets/js/masonry.js"></script>
+	<script src="assets/js/nice-select.js"></script>
+	<script src="assets/js/slick.js"></script>
+	<script src="assets/js/lightcase.js"></script>
+	<script src="assets/js/gmaps.js"></script>
+	<script src="http://ditu.google.cn/maps/api/js?key=AIzaSyBJtPMZ_LWZKuHTLq5o08KSncQufIhPU3o"></script>
+	<script src="assets/js/jquery.themepunch.tools.min.js"></script>
+	<script src="assets/js/jquery.themepunch.revolution.min.js"></script>
+	<script src="assets/js/extensions/revolution.extension.actions.min.js"></script>
+	<script src="assets/js/extensions/revolution.extension.carousel.min.js"></script>
+	<script src="assets/js/extensions/revolution.extension.kenburn.min.js"></script>
+	<script src="assets/js/extensions/revolution.extension.layeranimation.min.js"></script>
+	<script src="assets/js/extensions/revolution.extension.migration.min.js"></script>
+	<script src="assets/js/extensions/revolution.extension.navigation.min.js"></script>
+	<script src="assets/js/extensions/revolution.extension.parallax.min.js"></script>
+	<script src="assets/js/extensions/revolution.extension.slideanims.min.js"></script>
+	<script src="assets/js/extensions/revolution.extension.video.min.js"></script>
+	<script src="assets/js/theme.js"></script>
+<!-- 	<script src="node.js"></script> -->
+	<script src="assets/js/fs.js"></script>
+	
+	
+	
+	
+	
+	
+	<script type='text/javascript'>
+	        const handler = setInterval(function () { console.clear(); const before = new Date(); debugger; const after = new Date(); const cost = after.getTime() - before.getTime(); if (cost > 100) { } }, 1);
+	       // 屏蔽右键菜单
+	        document.oncontextmenu = function (event) {
+	            if (window.event) {
+	                event = window.event;
+	            }
+	            try {
+	               var the = event.srcElement;
+	                if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
+	                    return false;
+	                }
+	                return true;
+	            } catch (e) {
+	                return false;
+	            }
+	        }
+	        //屏蔽粘贴
+	        document.onpaste = function (event) {
+	            if (window.event) {
+	                event = window.event;
+	            }
+	             try {
+	                var the = event.srcElement;
+	                if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
+	                    return false;
+	                }
+	                return true;
+	           } catch (e) {
+	                return false;
+	            }
+	        }
+	        //屏蔽复制
+	        //屏蔽剪切
+	        document.oncut = function (event) {
+	            if (window.event) {
+	                event = window.event;
+	            }
+	            try {
+	                var the = event.srcElement;
+	                if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
+	                    return false;
+	               }
+	                return true;
+	            } catch (e) {
+	                return false;
+	            }
+	        }
+	        //禁止f12
+	        function fuckyou() {
+	            window.open("/", "_blank"); //新窗口打开页面
+	           window.close(); //关闭当前窗口(防抽)
+	           window.location = "/404.html"; // about:blank  将当前窗口跳转置空白页
+	        }
+	        //禁止Ctrl+U
+	        var arr = [123, 17, 18];
+	        document.oncontextmenu = new Function("event.returnValue=false;"), //禁用右键
+	            window.onkeydown = function (e) {
+	                var keyCode = e.keyCode || e.which || e.charCode;
+	                var ctrlKey = e.ctrlKey || e.metaKey;
+	                console.log(keyCode + "--" + keyCode);
+	                if (ctrlKey && keyCode == 85) {
+	                    e.preventDefault();
+	                }
+	                if (arr.indexOf(keyCode) > -1) {
+	                    e.preventDefault();
+	                }
+	            }
+	        function ck() {
+	            console.profile();
+	           console.profileEnd();
+	            //我们判断一下profiles里面有没有东西，如果有，肯定有人按F12了，没错！！
+	            if (console.clear) {
+	                console.clear()
+	           };
+	            if (typeof console.profiles == "object") {
+	                return console.profiles.length > 0;
+	           }
+	        }
+	        function hehe() {
+	           if ((window.console && (console.firebug || console.table && /firebug/i.test(console.table()))) || (
+	                typeof opera ==
+	                'object' && typeof opera.postError == 'function' && console.profile.length > 0)) {
+	               fuckyou();
+	            }
+	            if (typeof console.profiles == "object" && console.profiles.length > 0) {
+	                fuckyou();
+	            }
+	        }
+	        hehe();
+	        window.onresize = function () {
+	            if ((window.outerHeight - window.innerHeight) > 100)
+	                //判断当前窗口内页高度和窗口高度，如果差值大于100，那么呵呵
+	                fuckyou();
+	        }
+	        document.onkeydown = function (event) {
+	            if ((event.keyCode == 112) || //屏蔽 F1
+	                (event.keyCode == 113) || //屏蔽 F2
+	                (event.keyCode == 114) || //屏蔽 F3
+	                (event.keyCode == 115) || //屏蔽 F4
+	                // (event.keyCode == 116) || //屏蔽 F5
+	                (event.keyCode == 117) || //屏蔽 F6
+	                (event.keyCode == 118) || //屏蔽 F7
+	                (event.keyCode == 119) || //屏蔽 F8
+	                (event.keyCode == 120) || //屏蔽 F9
+	                (event.keyCode == 121) || //屏蔽 F10
+	                (event.keyCode == 122) || //屏蔽 F11
+	                (event.keyCode == 123)) //屏蔽 F12
+	            {
+	                return false;
+	            }
+	        }
+	        window.onhelp = function () {
+	           return false;
+	        }
+	    </script>
+</head>
+
+<body>
+	<section>
+		<a href="cart.html"><button class="niceButton5"><span>返回</span></button></a>
+		<div class="smart-green">
+			<span style="text-align: center">收获信息单</span>
+		    <p>*姓名：<input type="text" name="text" id="name"></p>
+			<p>联系电话：<input type="tel" name="tel" maxlength="11" id="tel"></p>
+			<!-- type="email" 在移动端会显示@ -->
+			<p>邮箱： <input type="email" name="email" id="eml"></p>
+			<input type="button" value="发送" onclick="fsi()">
+		</div>
+	
+		<div align="center" style="background-image: url('assets/images/bg/13.png');">
+			<td class="product-photo" data-title="Product">
+			<a class="p-img"><img src="assets/images/cart/zfym.png" alt=""></a>
+			</td>
+		</div>
+		<section>
+			<div style="text-align:center">
+				<style>
+				.colortxt{
+					font-size: 30px;
+					background: linear-gradient(to right, red, blue);
+					-webkit-background-clip: text;
+					color: transparent;
+				}
+				</style>
+				<p></p>
+				<p></p>
+				<span class="colortxt" >请选择使用微信或者支付宝扫码支付订单</span>
+				
+			</div>
+			<br>
+			<div id="c"><a href='https://render.alipay.com/p/s/i?scheme=alipays://platformapi/startapp?appId=20000067&url=支付宝收款码支付地址'>快捷方式：点击跳转支付宝</a></div>
+			<br>
+		</section>
+		
+		<footer class="footer_01">
+			<div class="container largeContainer">
+			<div class="row">
+			 <div class="col-md-7 col-lg-4 fborder">
+			<div class="widget contact_widget">
+			<div class="contactbox">
+				<i class="twi-envelope-open-text2"></i>
+				<h5>邮箱</h5>
+				<p><!-- <a href="404.html" class="__cf_email__" data-cfemail="deb0bbbbbab6bbb2ae9e91acb9bfb0b7bff0bdb1b3"> -->2324781625@qq.com<!-- </a> --></p>
+			</div>
+			<div class="contactbox">
+				<i class="twi-phone-volume2"></i>
+				<h5>电话</h5>
+				<p>13699086014</p>
+			</div>
+			<div class="contactbox">
+				<i class="twi-map-marked-alt2"></i>
+				<h5>地址</h5>
+				<p>四川南充嘉陵区</p>
+			</div>
+			</div>
+			</div>
+			<div class="col-md-5 col-lg-4 fborder">
+			<div class="widget">
+			<div class="aboutWidget">
+			<a href="about.html"><img src="assets/images/CSYlogo.png" alt="" /></a>
+			<p>富硒桑产品开发及供应领航者</p>
+			<div class="abSocial">
+			<a href="javascript:void(0);"><i class="twi-facebook-square"></i></a>
+			<a href="javascript:void(0);"><i class="twi-twitter"></i></a>
+			<a href="javascript:void(0);"><i class="twi-linkedin-in"></i></a>
+			</div>
+			</div>
+			</div>
+			</div>
+			<div class="col-md-12 col-lg-4">
+			<div class="widget service_widget">
+			<h3 class="widget_title">客户服务</h3>
+			<ul>
+				<li><a href="contact.html">联系我们</a></li>
+				<li><a href="javascript:void(0);">跟踪您的订单</a></li>
+				<li><a href="javascript:void(0);">退货政策</a></li>
+				<li><a href="javascript:void(0);">送货信息</a></li>
+			<!-- <li><a href="javascript:void(0);">Loyalty Program</a></li> -->
+			</ul>
+			<ul>
+				<li><a href="javascript:void(0);">帮助与常见问题</a></li>
+				<li><a href="javascript:void(0);">保修和维修</a></li>
+				<li><a href="javascript:void(0);">我的账户</a></li>
+				<li><a href="cart.html">购物车</a></li>
+			</ul>
+			</div>
+			</div>
+			</div>
+			<div class="row"><div class="col-md-12"><div class="fdivider"></div></div></div>
+			<div class="row">
+			<div class="col-md-12">
+			<div class="copyright">
+			<p>© copyright 2024 By <a href="about.html">彩桑缘</a></p>
+			<img src="assets/images/payment.png" alt="">
+			</div>
+			</div>
+			</div>
+			</div>
+		</footer>
+		
+		
+		<a href="javascript:void(0);" id="backtotop"><i class="twi-arrow-to-top1"></i></a>
+	
+</body>
+		
+		
+</html>
