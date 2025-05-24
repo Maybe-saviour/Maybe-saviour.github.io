@@ -37,7 +37,7 @@ export default {
       }
 
       // 向后端API发送注册请求
-      fetch('http://localhost:3000/api/register', {
+      fetch(`${process.env.VUE_APP_API_BASE_URL}/api/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

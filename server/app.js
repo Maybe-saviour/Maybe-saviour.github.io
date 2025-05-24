@@ -5,7 +5,12 @@ const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors());
+
+// 配置 CORS 中间件，允许来自特定前端域名的请求
+app.use(cors({
+  origin: 'https://maybe-saviour.github.io',
+  credentials: true
+}));
 
 // 数据库连接配置
 const db = mysql.createPool({

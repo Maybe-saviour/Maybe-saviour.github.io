@@ -66,7 +66,7 @@ export default {
     },
     handleLogin() {
       // 向后端API发送登录请求
-      fetch('http://localhost:3000/api/login', {
+      fetch(`${process.env.VUE_APP_API_BASE_URL}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export default {
         return;
       }
       // 向后端API发送注册请求
-      fetch('http://localhost:3000/api/register', {
+      fetch(`${process.env.VUE_APP_API_BASE_URL}/api/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
