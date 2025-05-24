@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise'); // 使用 promise 版本
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -8,15 +8,15 @@ app.use(bodyParser.json());
 
 // 配置 CORS 中间件，允许来自特定前端域名的请求
 app.use(cors({
-  origin: 'https://maybe-saviour.github.io', // 允许的前端域名
+  origin: 'https://maybe-saviour.github.io', // 移除多余的空格
   credentials: true // 允许 cookies 和其他凭证
 }));
 
 // 数据库连接配置
 const db = mysql.createPool({
   host: 'localhost',
-  user: 'ELI', // 替换为你的Navicat数据库用户名
-  password: '123456', // 替换为你的Navicat数据库密码
+  user: 'ELI', // 替换为你的数据库用户名
+  password: '123456', // 替换为你的数据库密码
   database: 'llwl'  // 替换为你的数据库名称
 }));
 
@@ -26,49 +26,41 @@ app.get('/', (req, res) => {
 });
 
 // 测试数据库连接
-app.get('/testdb', (req, res) => {
-  const sqlTest = 'SELECT 1 + 1 AS result';
-  db.promise().query(sqlTest)
-    .then(result => {
-      res.json(result[0]);
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+app.get('/testdb', async (req, res) => {
+  try {
+    const [result] = await db.query('SELECT 1 + 1 AS result');
+    res.json(result[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // 注册接口
-app.post('/api/register', (req, res) => {
+app.post('/api/register', async (req, res) => {
   const { username, password } = req.body;
   
-  // 在实际项目中，这里应该使用密码哈希库（如bcrypt）来加密密码
-  const sqlInsert = 'INSERT INTO users (username, password) VALUES (?, ?)';
-  db.promise().query(sqlInsert, [username, password])
-    .then(() => {
-      res.status(201).json({ message: '注册成功！' });
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+  try {
+    await db.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, password]);
+    res.status(201).json({ message: '注册成功！' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // 登录接口
-app.post('/api/login', (req, res) => {
+app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
   
-  // 查询用户
-  const sqlSelect = 'SELECT * FROM users WHERE username = ? AND password = ?';
-  db.promise().query(sqlSelect, [username, password])
-    .then(([results]) => {
-      if (results.length > 0) {
-        res.status(200).json({ message: '登录成功！' });
-      } else {
-        res.status(401).json({ error: '用户名或密码错误' });
-      }
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+  try {
+    const [results] = await db.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password]);
+    if (results.length > 0) {
+      res.status(200).json({ message: '登录成功！' });
+    } else {
+      res.status(401).json({ error: '用户名或密码错误' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 const PORT = 3000;
