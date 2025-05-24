@@ -8,8 +8,8 @@ app.use(bodyParser.json());
 
 // 配置 CORS 中间件，允许来自特定前端域名的请求
 app.use(cors({
-  origin: 'https://maybe-saviour.github.io',
-  credentials: true
+  origin: 'https://maybe-saviour.github.io', // 允许的前端域名
+  credentials: true // 允许 cookies 和其他凭证
 }));
 
 // 数据库连接配置
@@ -18,7 +18,7 @@ const db = mysql.createPool({
   user: 'ELI', // 替换为你的Navicat数据库用户名
   password: '123456', // 替换为你的Navicat数据库密码
   database: 'llwl'  // 替换为你的数据库名称
-});
+}));
 
 // 默认首页路由
 app.get('/', (req, res) => {
