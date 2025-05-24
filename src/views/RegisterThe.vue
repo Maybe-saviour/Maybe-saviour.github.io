@@ -1,64 +1,47 @@
 <template>
   <div class="register-container">
     <h2>注册</h2>
-    <form @submit.prevent="handleRegister">
+    <form @submit.prevent="register">
       <div class="form-group">
         <label for="username">用户名</label>
-        <input type="text" v-model="username" id="username" placeholder="请输入用户名" required />
+        <input type="text" id="username" v-model="username" required>
       </div>
       <div class="form-group">
         <label for="password">密码</label>
-        <input type="password" v-model="password" id="password" placeholder="请输入密码" required />
-      </div>
-      <div class="form-group">
-        <label for="confirm-password">确认密码</label>
-        <input type="password" v-model="confirmPassword" id="confirm-password" placeholder="确认密码" required />
+        <input type="password" id="password" v-model="password" required>
       </div>
       <button type="submit">注册</button>
     </form>
-    <p>已有账号？<router-link to="/login">登录</router-link></p>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
       username: '',
-      password: '',
-      confirmPassword: ''
+      password: ''
     };
   },
   methods: {
-    handleRegister() {
-      if (this.password !== this.confirmPassword) {
-        alert('密码不一致，请重新输入！');
-        return;
-      }
-
-      // 向后端API发送注册请求
-      fetch(`${process.env.VUE_APP_API_BASE_URL}/api/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: this.username,
-          password: this.password
-        }),
+    register() {
+      axios.post('http://localhost:3000/api/register', {
+        username: this.username,
+        password: this.password
       })
-      .then(response => response.json())
-      .then(data => {
-        if (data.message) {
-          alert(data.message);
-          this.$router.push('/login');
-        } else if (data.error) {
-          alert('注册失败：' + data.error);
+      .then(response => {
+        if (response.data.message === '注册成功！') {
+          localStorage.setItem('isLoggedIn', 'true'); // 设置登录状态
+          localStorage.setItem('username', this.username); // 存储用户名
+          this.$router.push('/'); // 注册成功后跳转到首页
+        } else {
+          alert('注册失败，请重试');
         }
       })
       .catch(error => {
-        console.error('Error:', error);
-        alert('注册时发生错误，请稍后重试。');
+        console.error('注册请求失败:', error);
       });
     }
   }
@@ -67,48 +50,40 @@ export default {
 
 <style scoped>
 .register-container {
-  width: 300px;
-  margin: 50px auto;
+  max-width: 400px;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #f7f7f7;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
 .form-group {
   margin-bottom: 15px;
 }
 
-label {
+.form-group label {
   display: block;
   margin-bottom: 5px;
 }
 
-input {
+.form-group input {
   width: 100%;
   padding: 8px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 button {
-  width: 100%;
-  padding: 10px;
-  background-color: #70b1ea;
-  border: none;
+  padding: 10px 15px;
+  background-color: #00bcd4;
   color: white;
-  font-size: 1.1rem;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  border-radius: 5px;
 }
 
 button:hover {
-  background-color: #4a8dbf;
+  background-color: #0097a7;
 }
 </style>

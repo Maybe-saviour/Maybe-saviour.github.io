@@ -1,18 +1,11 @@
-// import { createApp } from 'vue'
-// import App from './App.vue'
-
-// createApp(App).mount('#app')
-
-// -------------------------------------
-// import { createApp } from 'vue';
-// import App from './App.vue';
-// import router from './router';
-
-// createApp(App).use(router).mount('#app');
-
-
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';  // 引入router
 
-createApp(App).use(router).mount('#app');
+// 初始化全局状态
+const app = createApp(App);
+app.config.globalProperties.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+app.config.globalProperties.username = localStorage.getItem('username') || '';
+
+app.use(router);
+app.mount('#app');

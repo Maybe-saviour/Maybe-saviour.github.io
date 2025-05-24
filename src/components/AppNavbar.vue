@@ -1,6 +1,5 @@
 <template>
   <nav class="navbar">
-    <!-- 页头 -->
     <header>
       <div class="logo">
         <h1>流量涡轮</h1>
@@ -22,7 +21,7 @@
               <a href="#" @click="logout">退出</a>
             </template>
             <template v-else>
-              <router-link to="/login">登录</router-link>/<router-link to="/register">注册</router-link>
+              <router-link to="/Login">登录</router-link>/<router-link to="/Register">注册</router-link>
             </template>
           </li>
         </ul>
@@ -45,7 +44,17 @@ export default {
       localStorage.removeItem('username');
       this.isLoggedIn = false;
       this.username = '';
-      this.$router.push('/login'); // 退出后跳转到登录页
+      this.$router.push('/Login'); // 退出后跳转到登录页
+    }
+  },
+  watch: {
+    // 监听路由变化，更新登录状态
+    '$route': {
+      handler() {
+        this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        this.username = localStorage.getItem('username') || '';
+      },
+      immediate: true
     }
   }
 };
@@ -92,5 +101,17 @@ nav a:hover {
 
 nav a.active {
   background-color: #0097a7;  /* 科技蓝，选中状态 */
+}
+
+.auth-links {
+  margin-left: 20px;
+}
+
+.auth-links span {
+  margin-right: 10px;
+}
+
+.auth-links a {
+  cursor: pointer;
 }
 </style>

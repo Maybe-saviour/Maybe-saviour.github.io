@@ -1,198 +1,89 @@
 <template>
   <div class="login-container">
-    <!-- 登录部分 -->
-    <div v-if="isLoginForm" class="login-form">
-      <h2>登录</h2>
-      <form @submit.prevent="handleLogin">
-        <div class="input-group">
-          <label for="username">用户名</label>
-          <input type="text" id="username" v-model="username" required />
-        </div>
-        <div class="input-group">
-          <label for="password">密码</label>
-          <input type="password" id="password" v-model="password" required />
-        </div>
-        <button type="submit">登录</button>
-      </form>
-      <p>
-        还没有账号？<a href="#" @click="toggleForm">去注册</a>
-      </p>
-    </div>
-
-    <!-- 注册部分 -->
-    <div v-else class="register-form">
-      <h2>注册</h2>
-      <form @submit.prevent="handleRegister">
-        <div class="input-group">
-          <label for="username">用户名</label>
-          <input type="text" id="username" v-model="username" required />
-        </div>
-        <div class="input-group">
-          <label for="email">邮箱</label>
-          <input type="email" id="email" v-model="email" required />
-        </div>
-        <div class="input-group">
-          <label for="password">密码</label>
-          <input type="password" id="password" v-model="password" required />
-        </div>
-        <div class="input-group">
-          <label for="confirmPassword">确认密码</label>
-          <input type="password" id="confirmPassword" v-model="confirmPassword" required />
-        </div>
-        <button type="submit">注册</button>
-      </form>
-      <p>
-        已经有账号？<a href="#" @click="toggleForm">去登录</a>
-      </p>
-    </div>
+    <h2>登录</h2>
+    <form @submit.prevent="login">
+      <div class="form-group">
+        <label for="username">用户名</label>
+        <input type="text" id="username" v-model="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" id="password" v-model="password" required>
+      </div>
+      <button type="submit">登录</button>
+    </form>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      isLoginForm: true, // 默认显示登录表单
-      isLoggedIn: localStorage.getItem('isLoggedIn') === 'true', // 从localStorage读取登录状态
       username: '',
-      password: '',
-      email: '',
-      confirmPassword: ''
+      password: ''
     };
   },
   methods: {
-    toggleForm() {
-      this.isLoginForm = !this.isLoginForm; // 切换表单显示状态
-    },
-    handleLogin() {
-      // 向后端API发送登录请求
-      fetch(`${process.env.VUE_APP_API_BASE_URL}/api/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: this.username,
-          password: this.password
-        }),
+    login() {
+      axios.post('http://localhost:3000/api/login', {
+        username: this.username,
+        password: this.password
       })
-      .then(response => response.json())
-      .then(data => {
-        if (data.message) {
-          alert(data.message);
-          // 保存登录状态和用户名
-          localStorage.setItem('isLoggedIn', 'true');
-          localStorage.setItem('username', this.username);
-          this.isLoggedIn = true;
-          this.$router.push('/AppHome'); // 登录成功后跳转到首页
-        } else if (data.error) {
-          alert('登录失败：' + data.error);
+      .then(response => {
+        if (response.data.message === '登录成功！') {
+          localStorage.setItem('isLoggedIn', 'true'); // 设置登录状态
+          localStorage.setItem('username', this.username); // 存储用户名
+          this.$router.push('/'); // 登录成功后跳转到首页
+        } else {
+          alert('登录失败，请检查用户名和密码');
         }
       })
       .catch(error => {
-        console.error('Error:', error);
-        alert('登录时发生错误，请稍后重试。');
+        console.error('登录请求失败:', error);
       });
-    },
-    handleRegister() {
-      if (this.password !== this.confirmPassword) {
-        alert('密码不一致');
-        return;
-      }
-      // 向后端API发送注册请求
-      fetch(`${process.env.VUE_APP_API_BASE_URL}/api/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: this.username,
-          password: this.password
-        }),
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.message) {
-          alert(data.message);
-          this.isLoginForm = true; // 切换回登录表单
-        } else if (data.error) {
-          alert('注册失败：' + data.error);
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('注册时发生错误，请稍后重试。');
-      });
-    }
-  },
-  watch: {
-    isLoggedIn(newVal) {
-      if (newVal) {
-        this.$router.push('/AppHome'); // 用户登录成功，跳转到首页
-      }
     }
   }
 };
 </script>
 
 <style scoped>
-/* 样式部分 */
 .login-container {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
-  background: #f4f4f4;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
-h2 {
-  text-align: center;
+.form-group {
+  margin-bottom: 15px;
 }
 
-.input-group {
-  margin-bottom: 20px;
-}
-
-.input-group label {
+.form-group label {
   display: block;
   margin-bottom: 5px;
 }
 
-.input-group input {
+.form-group input {
   width: 100%;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 8px;
   border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 button {
-  width: 100%;
-  padding: 10px;
+  padding: 10px 15px;
   background-color: #00bcd4;
-  border: none;
   color: white;
-  font-size: 1.2rem;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
 }
 
 button:hover {
   background-color: #0097a7;
-}
-
-p {
-  text-align: center;
-  margin-top: 15px;
-}
-
-a {
-  color: #00bcd4;
-  cursor: pointer;
-}
-
-a:hover {
-  text-decoration: underline;
 }
 </style>
