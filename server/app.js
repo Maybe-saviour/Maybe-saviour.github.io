@@ -18,7 +18,7 @@ const db = mysql.createPool({
   user: 'ELI', // 替换为你的数据库用户名
   password: '123456', // 替换为你的数据库密码
   database: 'llwl'  // 替换为你的数据库名称
-}));
+});
 
 // 默认首页路由
 app.get('/', (req, res) => {
