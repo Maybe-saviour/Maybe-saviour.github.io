@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- 页面加载动画 -->
-    <div class="preloader">
+    <div class="preloader" v-if="showPreloader">
       <div class="loader-container">
         <div class="loader-text">
           <span>流</span>
@@ -26,20 +26,18 @@ import AppFooter from './components/AppFooter.vue';
 
 export default {
   components: { AppNavbar, AppFooter },
+  data() {
+    return {
+      showPreloader: true,
+    };
+  },
   mounted() {
     // 页面加载完毕后隐藏加载动画
-    window.onload = () => {
-      const preloader = document.querySelector('.preloader');
-      preloader.classList.add('hide');  // 添加类，触发动画
-    };
+    setTimeout(() => {
+      this.showPreloader = false;
+    }, 2000); // 设置2秒后隐藏加载动画
   }
 };
-
-setTimeout(() => {
-  const preloader = document.querySelector('.preloader');
-  preloader.classList.add('hide');
-}, 2000); // 设置2秒后隐藏加载动画
-
 </script>
 
 <style lang="scss">
