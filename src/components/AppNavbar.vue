@@ -34,8 +34,8 @@
 export default {
   data() {
     return {
-      isLoggedIn: localStorage.getItem('isLoggedIn') === 'true', // 从 localStorage 获取登录状态
-      username: localStorage.getItem('username') || ''  // 从 localStorage 获取用户名
+      isLoggedIn: false,
+      username: ''
     };
   },
   methods: {
@@ -45,17 +45,17 @@ export default {
       this.isLoggedIn = false;
       this.username = '';
       this.$router.push('/Login'); // 退出后跳转到登录页
+    },
+    updateAuthStatus() {
+      this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      this.username = localStorage.getItem('username') || '';
     }
   },
+  created() {
+    this.updateAuthStatus();
+  },
   watch: {
-    // 监听路由变化，更新登录状态
-    '$route': {
-      handler() {
-        this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        this.username = localStorage.getItem('username') || '';
-      },
-      immediate: true
-    }
+    '$route': 'updateAuthStatus'
   }
 };
 </script>

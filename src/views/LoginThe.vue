@@ -36,6 +36,7 @@ export default {
           localStorage.setItem('isLoggedIn', 'true'); // 设置登录状态
           localStorage.setItem('username', this.username); // 存储用户名
           this.$router.push('/'); // 登录成功后跳转到首页
+          this.$forceUpdate(); // 强制更新组件
         } else {
           alert('登录失败，请检查用户名和密码');
         }
