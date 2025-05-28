@@ -33,6 +33,9 @@
       </div>
     </div>
 
+    <!-- 新增的白色线条 -->
+    <div class="divider"></div>
+
     <!-- 底部版权 -->
     <div class="footer-bottom">
       <p>&copy; 2024 流量涡轮 | <a href="#" @click.prevent="showModal('privacy')">隐私政策</a> | <a href="#" @click.prevent="showModal('terms')">服务条款</a></p>
@@ -244,10 +247,10 @@ export default {
   margin: 20px auto;
 }
 
-/* 分割线样式 */
+/* 新增的白色线条 */
 .divider {
   height: 1px;
-  background-color: #444;
+  background-color: white;
   margin: 20px 0;
 }
 
