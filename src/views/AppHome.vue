@@ -18,11 +18,6 @@
               <img :src="item.image" :alt="item.title" />
               <p>{{ item.title }}</p>
             </div>
-            <!-- 将原始图片添加到轮播图中 -->
-            <div class="carousel-item">
-              <img src="@/assets/封面清晰化.jpg" alt="人工智能" class="intro-img" />
-              <p>人工智能</p>
-            </div>
           </div>
         </div>
         <button @click="prev" class="prev">&#10094;</button>
@@ -63,20 +58,30 @@
       <section id="section-2" class="tech-exploration">
         <h2>科技探索</h2>
         <div class="card-container">
-          <div class="card">
-            <img src="@/assets/人工智能.jpg" alt="人工智能" />
-            <h3>人工智能</h3>
-            <p>智能算法改变世界，探索机器如何思考。</p>
+          <!-- 将原本的"人工智能"卡片替换为轮播图 -->
+          <div class="card-carousel" style="width: 30%;">
+            <div
+              class="card-carousel-items"
+              :style="{ transform: `translateX(-${currentTechIndex * 100}%)` }"
+            >
+              <div class="card-carousel-item" v-for="(tech, index) in techItems" :key="index">
+                <img :src="tech.image" :alt="tech.title" style="width: 100%; height: auto;" />
+                <h3 style="padding: 15px 15px 5px; color: #ffcc00;">{{ tech.title }}</h3>
+                <p style="padding: 0 15px 15px;">{{ tech.description }}</p>
+              </div>
+            </div>
+            <button @click="prevTech" class="prev-tech" style="position: absolute; left: 5px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;">&#10094;</button>
+            <button @click="nextTech" class="next-tech" style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;">&#10095;</button>
           </div>
-          <div class="card">
-            <img src="@/assets/量子计算.jpg" alt="量子计算" />
-            <h3>量子计算</h3>
-            <p>量子技术将颠覆传统计算，开启新纪元。</p>
+          <div class="card" style="width: 30%; margin-left: 5%;">
+            <img src="@/assets/量子计算.jpg" alt="量子计算" style="width: 100%; height: auto;" />
+            <h3 style="padding: 15px 15px 5px; color: #ffcc00;">量子计算</h3>
+            <p style="padding: 0 15px 15px;">量子技术将颠覆传统计算，开启新纪元。</p>
           </div>
-          <div class="card">
-            <img src="@/assets/5G.jpg" alt="5G" />
-            <h3>5G通信</h3>
-            <p>超高速网络将带来更智能、更连接的未来。</p>
+          <div class="card" style="width: 30%; margin-left: 5%;">
+            <img src="@/assets/5G.jpg" alt="5G" style="width: 100%; height: auto;" />
+            <h3 style="padding: 15px 15px 5px; color: #ffcc00;">5G通信</h3>
+            <p style="padding: 0 15px 15px;">超高速网络将带来更智能、更连接的未来。</p>
           </div>
         </div>
       </section>
@@ -117,11 +122,18 @@
 <script setup>
 import { ref } from 'vue';
 
-// 控制轮播图的数组
+// 控制主轮播图的数组
 const carouselItems = [
   { title: '核心理念', image: require('@/assets/关键词.png') },
   { title: '最新活动', image: require('@/assets/系统发展规划.jpg') },
   { title: '重要合作', image: require('@/assets/抖音直播.jpg') },
+];
+
+// 科技探索轮播图的数组
+const techItems = [
+  { title: '人工智能', image: require('@/assets/人工智能.jpg'), description: '智能算法改变世界，探索机器如何思考。' },
+  { title: '深度学习', image: require('@/assets/深度学习.jpg'), description: '通过神经网络模拟人脑进行学习和决策。' },
+  { title: '计算机视觉', image: require('@/assets/计算机视觉.jpg'), description: '让机器能够理解和处理视觉信息。' },
 ];
 
 // 核心服务
@@ -140,29 +152,53 @@ const coreServices = [
   },
 ];
 
-// 当前显示的轮播图索引
+// 主轮播图的当前索引
 const currentIndex = ref(0);
 
-// 下一张
+// 科技探索轮播图的当前索引
+const currentTechIndex = ref(0);
+
+// 主轮播图下一张
 const next = () => {
-  if (currentIndex.value < carouselItems.length) {
+  if (currentIndex.value < carouselItems.length - 1) {
     currentIndex.value++;
   } else {
     currentIndex.value = 0;
   }
 };
 
-// 上一张
+// 主轮播图上一张
 const prev = () => {
   if (currentIndex.value > 0) {
     currentIndex.value--;
   } else {
-    currentIndex.value = carouselItems.length;
+    currentIndex.value = carouselItems.length - 1;
   }
 };
 
-// 自动切换轮播图
+// 科技探索轮播图下一张
+const nextTech = () => {
+  if (currentTechIndex.value < techItems.length - 1) {
+    currentTechIndex.value++;
+  } else {
+    currentTechIndex.value = 0;
+  }
+};
+
+// 科技探索轮播图上一张
+const prevTech = () => {
+  if (currentTechIndex.value > 0) {
+    currentTechIndex.value--;
+  } else {
+    currentTechIndex.value = techItems.length - 1;
+  }
+};
+
+// 自动切换主轮播图
 setInterval(next, 3000); // 每3秒自动切换一次
+
+// 自动切换科技探索轮播图
+setInterval(nextTech, 4000); // 每4秒自动切换一次
 </script>
 
 <style scoped>
@@ -346,22 +382,17 @@ p {
 }
 
 .card {
-  width: 30%;
   background-color: #333;
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 20px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease-in-out;
+  position: relative;
 }
 
 .card:hover {
   transform: translateY(-10px);
-}
-
-.card img {
-  width: 100%;
-  height: auto;
 }
 
 .card h3 {
@@ -371,6 +402,32 @@ p {
 
 .card p {
   padding: 0 15px 15px;
+}
+
+/* 科技探索轮播图 */
+.card-carousel {
+  position: relative;
+  background-color: #333;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-carousel-items {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.card-carousel-item {
+  width: 100%;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.card-carousel-item img {
+  width: 100%;
+  height: auto;
 }
 
 /* 核心服务 */
