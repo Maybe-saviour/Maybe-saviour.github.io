@@ -1,117 +1,116 @@
 <template>
   <div class="home">
-    <!-- 首页内容 -->
-    <section id="section-1" class="intro">
-      <!-- 替换封面 -->
-      <img src="@/assets/封面清晰化.jpg" class="intro-img" alt="人工智能" />
-    </section>
+    <!-- 平台概览 -->
+    <div class="platform-overview">
+      <!-- 轮播图部分 -->
+      <section class="carousel">
+        <h2>核心理念与最新活动</h2>
+      </section>
 
-    <!-- 科技探索部分 -->
-    <section id="section-2" class="tech-exploration">
-      <h2>科技探索</h2>
-      <div class="card-container">
-        <div class="card">
-          <img src="@/assets/人工智能.jpg" alt="人工智能" />
-          <h3>人工智能</h3>
-          <p>智能算法改变世界，探索机器如何思考。</p>
-        </div>
-        <div class="card">
-          <img src="@/assets/量子计算.jpg" alt="量子计算" />
-          <h3>量子计算</h3>
-          <p>量子技术将颠覆传统计算，开启新纪元。</p>
-        </div>
-        <div class="card">
-          <img src="@/assets/5G.jpg" alt="5G" />
-          <h3>5G通信</h3>
-          <p>超高速网络将带来更智能、更连接的未来。</p>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- 平台概览 -->
-  <div class="platform-overview">
-    <!-- 轮播图部分 -->
-    <section class="carousel">
-      <h2>核心理念与最新活动</h2>
-    </section>
-
-    <!-- 轮播图 -->
-    <div class="carousel-container">
-      <div class="carousel">
-        <div
-          class="carousel-items"
-          :style="{ transform: `translateX(-${currentIndex * 100}%)`, transition: 'transform 0.5s ease' }"
-        >
-          <div class="carousel-item" v-for="(item, index) in carouselItems" :key="index">
-            <img :src="item.image" :alt="item.title" />
-            <p>{{ item.title }}</p>
+      <!-- 轮播图 -->
+      <div class="carousel-container">
+        <div class="carousel">
+          <div
+            class="carousel-items"
+            :style="{ transform: `translateX(-${currentIndex * 100}%)`, transition: 'transform 0.5s ease' }"
+          >
+            <div class="carousel-item" v-for="(item, index) in carouselItems" :key="index">
+              <img :src="item.image" :alt="item.title" />
+              <p>{{ item.title }}</p>
+            </div>
+            <!-- 将原始图片添加到轮播图中 -->
+            <div class="carousel-item">
+              <img src="@/assets/封面清晰化.jpg" alt="人工智能" class="intro-img" />
+              <p>人工智能</p>
+            </div>
           </div>
         </div>
+        <button @click="prev" class="prev">&#10094;</button>
+        <button @click="next" class="next">&#10095;</button>
       </div>
-      <button @click="prev" class="prev">&#10094;</button>
-      <button @click="next" class="next">&#10095;</button>
+
+      <!-- 平台简介 -->
+      <section class="platform-intro">
+        <h2>平台简介</h2>
+        <div class="intro-content">
+          <div class="intro-text">
+            <p>目前我们的平台运营主要是通过小程序、网站进行运营。</p>
+            <p>平台致力于提供高质量的服务和良好的用户体验，通过多种方式进行运营和推广。（微信扫描二维码体验小程序服务）</p>
+            <svg
+              t="1746592422839"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="4322"
+              width="100"
+              height="100"
+            >
+              <path
+                d="M765.44 566.3232l-199.1168 199.1168L512 819.712l-54.3232-54.272-199.1168-199.1168L312.8832 512 512 711.1168 711.1168 512l54.3232 54.3232zM765.44 258.56l-199.1168 199.1168L512 512 457.6768 457.6768 258.56 258.56l54.3232-54.272L512 403.4048l199.1168-199.1168 54.3232 54.272z"
+                fill="#00C080"
+                p-id="4323"
+              ></path>
+            </svg>
+          </div>
+          <div class="intro-image">
+            <img src="@/assets/platform.jpg" alt="平台图片" />
+          </div>
+        </div>
+      </section>
+
+      <!-- 科技探索部分 -->
+      <section id="section-2" class="tech-exploration">
+        <h2>科技探索</h2>
+        <div class="card-container">
+          <div class="card">
+            <img src="@/assets/人工智能.jpg" alt="人工智能" />
+            <h3>人工智能</h3>
+            <p>智能算法改变世界，探索机器如何思考。</p>
+          </div>
+          <div class="card">
+            <img src="@/assets/量子计算.jpg" alt="量子计算" />
+            <h3>量子计算</h3>
+            <p>量子技术将颠覆传统计算，开启新纪元。</p>
+          </div>
+          <div class="card">
+            <img src="@/assets/5G.jpg" alt="5G" />
+            <h3>5G通信</h3>
+            <p>超高速网络将带来更智能、更连接的未来。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 核心服务 -->
+      <section class="core-services">
+        <h2>核心服务</h2>
+        <div class="services">
+          <div class="service" v-for="(service, index) in coreServices" :key="index">
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.description }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 合作伙伴 -->
+      <section class="partners">
+        <h2>我们的合作伙伴</h2>
+        <div class="partner-logos">
+          <div class="partner">
+            <img src="@/assets/睿蓝.png" alt="汽车公司" class="partner-img" />
+            <p>汽车公司</p>
+          </div>
+          <div class="partner">
+            <img src="@/assets/高校.png" alt="高校" class="partner-img" />
+            <p>高校</p>
+          </div>
+          <div class="partner">
+            <img src="@/assets/媒体.png" alt="媒体" class="partner-img" />
+            <p>媒体</p>
+          </div>
+        </div>
+      </section>
     </div>
-
-    <!-- 平台简介 -->
-    <section class="platform-intro">
-      <h2>平台简介</h2>
-      <div class="intro-content">
-        <div class="intro-text">
-          <p>目前我们的平台运营主要是通过小程序、网站进行运营。</p>
-          <p>平台致力于提供高质量的服务和良好的用户体验，通过多种方式进行运营和推广。（微信扫描二维码体验小程序服务）</p>
-          <svg
-            t="1746592422839"
-            class="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="4322"
-            width="100"
-            height="100"
-          >
-            <path
-              d="M765.44 566.3232l-199.1168 199.1168L512 819.712l-54.3232-54.272-199.1168-199.1168L312.8832 512 512 711.1168 711.1168 512l54.3232 54.3232zM765.44 258.56l-199.1168 199.1168L512 512 457.6768 457.6768 258.56 258.56l54.3232-54.272L512 403.4048l199.1168-199.1168 54.3232 54.272z"
-              fill="#00C080"
-              p-id="4323"
-            ></path>
-          </svg>
-        </div>
-        <div class="intro-image">
-          <img src="@/assets/platform.jpg" alt="平台图片" />
-        </div>
-      </div>
-    </section>
-
-    <!-- 核心服务 -->
-    <section class="core-services">
-      <h2>核心服务</h2>
-      <div class="services">
-        <div class="service" v-for="(service, index) in coreServices" :key="index">
-          <h3>{{ service.title }}</h3>
-          <p>{{ service.description }}</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 合作伙伴 -->
-    <section class="partners">
-      <h2>我们的合作伙伴</h2>
-      <div class="partner-logos">
-        <div class="partner">
-          <img src="@/assets/睿蓝.png" alt="汽车公司" class="partner-img" />
-          <p>汽车公司</p>
-        </div>
-        <div class="partner">
-          <img src="@/assets/高校.png" alt="高校" class="partner-img" />
-          <p>高校</p>
-        </div>
-        <div class="partner">
-          <img src="@/assets/媒体.png" alt="媒体" class="partner-img" />
-          <p>媒体</p>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 
@@ -146,7 +145,7 @@ const currentIndex = ref(0);
 
 // 下一张
 const next = () => {
-  if (currentIndex.value < carouselItems.length - 1) {
+  if (currentIndex.value < carouselItems.length) {
     currentIndex.value++;
   } else {
     currentIndex.value = 0;
@@ -158,7 +157,7 @@ const prev = () => {
   if (currentIndex.value > 0) {
     currentIndex.value--;
   } else {
-    currentIndex.value = carouselItems.length - 1;
+    currentIndex.value = carouselItems.length;
   }
 };
 
@@ -167,36 +166,6 @@ setInterval(next, 3000); // 每3秒自动切换一次
 </script>
 
 <style scoped>
-/* 封面部分 */
-.intro {
-  position: relative;
-  height: 65vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-}
-
-.intro-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* 平台概览 */
-.platform-overview {
-  font-family: Arial, sans-serif;
-  color: white;
-  background: #121212;
-  padding: 40px 20px;
-  margin-top: 20px;
-}
-
 /* 轮播图部分 */
 .carousel {
   text-align: center;
@@ -293,6 +262,15 @@ setInterval(next, 3000); // 每3秒自动切换一次
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+/* 平台概览 */
+.platform-overview {
+  font-family: Arial, sans-serif;
+  color: white;
+  background: #121212;
+  padding: 40px 20px;
+  margin-top: 20px;
+}
+
 /* 平台简介 */
 .platform-intro {
   margin: 20px 0;
@@ -325,6 +303,10 @@ setInterval(next, 3000); // 每3秒自动切换一次
   margin: 10px 0;
 }
 
+.intro-text svg {
+  margin-top: 20px;
+}
+
 .intro-image img {
   max-width: 15%;
   height: auto;
@@ -349,6 +331,46 @@ p {
   font-size: 1.3rem;
   color: #bdc3c7;
   line-height: 1.6;
+}
+
+/* 科技探索卡片 */
+.tech-exploration {
+  padding: 40px 20px;
+  background-color: #1e1e1e;
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 30%;
+  background-color: #333;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.card h3 {
+  padding: 15px 15px 5px;
+  color: #ffcc00;
+}
+
+.card p {
+  padding: 0 15px 15px;
 }
 
 /* 核心服务 */
