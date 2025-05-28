@@ -59,12 +59,12 @@
         <h2>科技探索</h2>
         <div class="card-container">
           <!-- 将原本的"人工智能"卡片替换为轮播图 -->
-          <div class="card-carousel" style="width: 30%;">
+          <div class="tech-carousel">
             <div
-              class="card-carousel-items"
+              class="tech-carousel-items"
               :style="{ transform: `translateX(-${currentTechIndex * 100}%)` }"
             >
-              <div class="card-carousel-item" v-for="(tech, index) in techItems" :key="index">
+              <div class="tech-carousel-item" v-for="(tech, index) in techCarouselItems" :key="index">
                 <img :src="tech.image" :alt="tech.title" style="width: 100%; height: auto;" />
                 <h3 style="padding: 15px 15px 5px; color: #ffcc00;">{{ tech.title }}</h3>
                 <p style="padding: 0 15px 15px;">{{ tech.description }}</p>
@@ -130,7 +130,7 @@ const carouselItems = [
 ];
 
 // 科技探索轮播图的数组
-const techItems = [
+const techCarouselItems = [
   { title: '人工智能', image: require('@/assets/人工智能.jpg'), description: '智能算法改变世界，探索机器如何思考。' },
   { title: '深度学习', image: require('@/assets/深度学习.jpg'), description: '通过神经网络模拟人脑进行学习和决策。' },
   { title: '计算机视觉', image: require('@/assets/计算机视觉.jpg'), description: '让机器能够理解和处理视觉信息。' },
@@ -178,7 +178,7 @@ const prev = () => {
 
 // 科技探索轮播图下一张
 const nextTech = () => {
-  if (currentTechIndex.value < techItems.length - 1) {
+  if (currentTechIndex.value < techCarouselItems.length - 1) {
     currentTechIndex.value++;
   } else {
     currentTechIndex.value = 0;
@@ -190,7 +190,7 @@ const prevTech = () => {
   if (currentTechIndex.value > 0) {
     currentTechIndex.value--;
   } else {
-    currentTechIndex.value = techItems.length - 1;
+    currentTechIndex.value = techCarouselItems.length - 1;
   }
 };
 
@@ -381,6 +381,31 @@ p {
   flex-wrap: wrap;
 }
 
+.tech-carousel {
+  position: relative;
+  width: 30%;
+  background-color: #333;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+}
+
+.tech-carousel-items {
+  display: flex;
+  transition: transform 05.s ease;
+}
+
+.tech-carousel-item {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.tech-carousel-item img {
+  width: 100%;
+  height: auto;
+}
+
 .card {
   background-color: #333;
   border-radius: 12px;
@@ -388,7 +413,6 @@ p {
   margin-bottom: 20px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease-in-out;
-  position: relative;
 }
 
 .card:hover {
@@ -402,32 +426,6 @@ p {
 
 .card p {
   padding: 0 15px 15px;
-}
-
-/* 科技探索轮播图 */
-.card-carousel {
-  position: relative;
-  background-color: #333;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease-in-out;
-}
-
-.card-carousel-items {
-  display: flex;
-  transition: transform 0.5s ease;
-}
-
-.card-carousel-item {
-  width: 100%;
-  flex-shrink: 0;
-  text-align: center;
-}
-
-.card-carousel-item img {
-  width: 100%;
-  height: auto;
 }
 
 /* 核心服务 */
